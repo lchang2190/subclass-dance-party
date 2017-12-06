@@ -2,11 +2,13 @@
 var MakeDancer = function(top, left, timeBetweenSteps) {
 
   // use jQuery to create an HTML <span> tag
+
   this.$node = $('<span class="dancer"></span>');
+
   this.setPosition(top, left);
   this.step();
   this.time = timeBetweenSteps;
-  //var x = timeBetweenSteps
+  window.dancers.push(this.$node);
   // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
   // this one sets the position to some random default point within the body
 };
@@ -14,16 +16,10 @@ var MakeDancer = function(top, left, timeBetweenSteps) {
 MakeDancer.prototype.step = function (){
   // the basic dancer doesn't do anything interesting at all on each step,
   // it just schedules the next step
-//debugger;
-  //console.log(MakeBlinkyDancer);
-  //console.log('this', this);
-  console.log('this md', this)
-  setTimeout(this.step.bind(this), this.time);
 
-  //console.log('this in makeDancer', this);
-//console.log(this)
-  //console.log('ppp', this)
+  setTimeout(this.step.bind(this), this.time);
 };
+
 
 MakeDancer.prototype.setPosition = function(top, left) {
   // Use css top and left properties to position our <span> tag
@@ -31,8 +27,26 @@ MakeDancer.prototype.setPosition = function(top, left) {
   //
   var styleSettings = {
     top: top,
-    left: left
+    left: left,
   };
 
   this.$node.css(styleSettings);
+
 };
+
+MakeDancer.prototype.lineup = function () {
+  var dancersArray = window.dancers;
+
+
+  for ( var i = 0; i < dancersArray.length; i ++) {
+
+    var styleLine = {
+      top: 800,
+      left: i * 100,
+      margin: 100
+    }
+
+    dancersArray[i].css(styleLine);
+
+  }
+}
